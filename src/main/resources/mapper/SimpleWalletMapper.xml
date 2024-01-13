@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace 對應持久層的介面 -->
+<mapper namespace="com.cooba.mapper.SimpleWalletMapper">
+    <resultMap type="com.cooba.entity.SimpleWalletEntity" id="simpleWallet">
+        <result column="user_id" property="userId"/>
+        <result column="amount" property="amount"/>
+        <result column="updated_time" property="updatedTime"/>
+    </resultMap>
+
+    <select id="select" resultMap="simpleWallet">
+        select * from simple_wallet
+        where user_id = #{userId}
+    </select>
+
+    <insert id="insertAmount">
+        insert into simple_wallet(user_id, amount, updated_time)
+        values(
+        #{userId},
+        #{amount},
+        NOW()
+        )
+    </insert>
+
+    <update id="updateAmount">
+        update simple_wallet
+        set amount = #{amount},
+        updated_time = NOW()
+        WHERE user_id = #{userId}
+    </update>
+
+</mapper>

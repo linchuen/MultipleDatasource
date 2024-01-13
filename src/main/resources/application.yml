@@ -1,0 +1,34 @@
+spring:
+  datasource:
+    master:
+      #Hikari没有url属性
+      jdbc-url: jdbc:mysql://127.0.0.1:3307/main?serverTimezone=Asia/Taipei
+      username: root
+      password: root
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      minimumIdle: 10
+      maximumPoolSize: 20
+      autoCommit: true
+      idleTimeout: 30000
+      poolName: master-pool
+      maxLifetime: 1800000
+      connectionTimeout: 30000
+      connectionTestQuery: SELECT 1
+    slave:
+      jdbc-url: jdbc:mysql://127.0.0.1:3308/main?serverTimezone=Asia/Taipei
+      username: root
+      password: root
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      readonly: true
+      minimumIdle: 10
+      maximumPoolSize: 20
+      autoCommit: true
+      idleTimeout: 30000
+      poolName: slave-pool
+      maxLifetime: 1800000
+      connectionTimeout: 30000
+      connectionTestQuery: SELECT 1
+logging:
+  level:
+    com.cooba.mapper: debug
+    com.zaxxer.hikari: debug

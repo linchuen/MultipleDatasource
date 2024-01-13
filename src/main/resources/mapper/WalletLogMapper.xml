@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace 對應持久層的介面 -->
+<mapper namespace="com.cooba.mapper.WalletLogMapper">
+    <resultMap type="com.cooba.entity.WalletLogEntity" id="walletLog">
+        <result column="id" property="id"/>
+        <result column="user_id" property="userId"/>
+        <result column="before_amount" property="beforeAmount"/>
+        <result column="amount" property="amount"/>
+        <result column="created_time" property="createdTime"/>
+    </resultMap>
+
+    <select id="select" resultMap="walletLog">
+        select * from wallet_log
+        where user_id = #{userId}
+    </select>
+
+    <insert id="insertLog">
+        insert into wallet_log(user_id, before_amount, amount, created_time)
+        values(
+        #{userId},
+        #{beforeAmount},
+        #{amount},
+        NOW()
+        )
+    </insert>
+</mapper>
